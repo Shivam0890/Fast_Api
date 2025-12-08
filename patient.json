@@ -1,0 +1,98 @@
+
+	{"P001": {
+		"name": "Amit Sharma",
+			"age": 32,
+			"gender": "Male",
+			"blood_group": "A+",
+			"mobile": "9876543210",
+			"disease": "Diabetes",
+			"admitted_date": "2025-01-02",
+			"doctor": "Dr. Rakesh Singh"
+		},
+		"P002": {
+			"name": "Priya Verma",
+			"age": 27,
+			"gender": "Female",
+			"blood_group": "B+",
+			"mobile": "9988776655",
+			"disease": "Asthma",
+			"admitted_date": "2025-01-05",
+			"doctor": "Dr. Anjali Gupta"
+		},
+	
+	
+		"P003": {
+			"name": "Rahul Mishra",
+			"age": 41,
+			"gender": "Male",
+			"blood_group": "O-",
+			"mobile": "9123456789",
+			"disease": "Heart Problem",
+			"admitted_date": "2025-01-07",
+			"doctor": "Dr. Manish Kumar"
+		},
+	
+		"P004": {
+			"name": "Sneha Singh",
+			"age": 22,
+			"gender": "Female",
+			"blood_group": "AB+",
+			"mobile": "9012345678",
+			"disease": "Fever",
+			"admitted_date": "2025-01-08",
+			"doctor": "Dr. Ruchi Yadav"
+		},
+
+	"P005": {
+			"name": "Vikas Patel",
+			"age": 36,
+			"gender": "Male",
+			"blood_group": "B-",
+			"mobile": "9354678123",
+			"disease": "Kidney Infection",
+			"admitted_date": "2025-01-10",
+			"doctor": "Dr. Akhilesh Agarwal"
+		},
+	
+		"P006": {
+			"name": "Anjali Sharma",
+			"age": 30,
+			"gender": "Female",
+			"blood_group": "O+",
+			"mobile": "9090909090",
+			"disease": "Thyroid",
+			"admitted_date": "2025-01-12",
+			"doctor": "Dr. Nidhi Saxena"
+		},
+	
+		"P007": {
+			"name": "Gaurav Tiwari",
+			"age": 45,
+			"gender": "Male",
+			"blood_group": "A-",
+			"mobile": "9797979797",
+			"disease": "Cancer",
+			"admitted_date": "2025-01-13",
+			"doctor": "Dr. Deepak Sharma"
+		},
+	
+		"P008": {
+			"name": "Neha Pandey",
+			"age": 38,
+			"gender": "Female",
+			"blood_group": "AB-",
+			"mobile": "9000012345",
+			"disease": "Migraine",
+			"admitted_date": "2025-01-13",
+			"doctor": "Dr. Shalini Jain"
+		},
+		"P009": {
+			"name": "Rohan Kapoor",
+			"age": 29,
+			"gender": "Male",
+			"blood_group": "O+",
+			"mobile": "8888888888",
+			"disease": "Fracture",
+			"admitted_date": "2025-01-14"
+		}
+	}
