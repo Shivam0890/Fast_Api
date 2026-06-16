@@ -1,60 +1,52 @@
-from fastapi import FastAPI,Path,Query,HTTPException
-from pydantic_1 import BaseModel
-from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI,Path,HTTPException,Query
 import json
-
 
 app = FastAPI()
 
-with open('patient.json','r') as f :
-	load_data  = json.load(f)
 
-
-
+def laod_data():
+	with open('patient.json','r') as f :
+		data  =	json.load(f)
+	return data
 
 @app.get('/')
 def home():
-	return {'message':"This is a Homepage"}
+	return {'Welcome Page':"Hello Welcome to this side !"}
 
+@app.get('/about/{user}')
+def about(user:str ):
+	return {'About Page':f"Hello How are you ? Are you okey {user} !! "}
 
-@app.get('/about')
-def about():
-	return {
-		'This page':"This is Hospital management system software it will help you to store your all record"
-	}
 
 @app.get('/view')
-def show():
-	# data = load_data()
-	return load_data
-
+def view():
+	data = laod_data()
+	return data
 
 @app.get('/patient/{patient_id}')
-def patient(patient_id:str=Path(...,description="ID of the Patient",example='P001')):
-	data = load_data
+def view_patient(patient_id:str=Path(...,description='ID of the patient',example='P001 ,P002 etc')):
+	data = laod_data()
 
 	if patient_id in data:
 		return data[patient_id]
-	return {"error":"Patient not found"}
+	
+	raise HTTPException(status_code=404,detail="Patient not found")
 
 
 @app.get('/sort')
-def sort_patient(sort_by:str = Query(...,description="Sort according to what ?",example=["Height",'Age']),order_by:str = Query('asc',description='Ascending or Descending Order ')):
+def sort_patient(sort_by:str = Query(...,description='Give the information to sort according which ',example='height,bmi,weight,etc.'),order:str=Query(...,description='Tell the order of sorting',example="asc or desc")):
+	value_field = ['height','weight','bmi']
+
+	if sort_by not in value_field:
+		raise HTTPException(status_code=404 , detail=f'Invaild field select from {value_field}')
 	
-	valid_fields = ['height','weight','bmi']
-
-	if sort_by not in valid_fields:
-		raise HTTPException(status_code=400,detail = f'Invalid field select from {valid_fields}')
-
-
-	if order_by not in ['asc','desc']:
-		raise HTTPException(status_code =400,detail = 'Invalid order select between asc and desc')
+	if order not in ['asc','desc']:
+		raise HTTPException(status_code=404,detail='Invalid order of sorting give asc or desc order ')
 	
-	data  = load_data
+	data = laod_data()
 
-	sorted_order = True if order_by == 'desc' else False
+	sorted_order = True if order=='desc' else False
 
-
-	sorted_data =  sorted(data.values(),key=lambda x : x.get(sort_by,0) ,reverse=sorted_order)
+	sorted_data = sorted(data.values(),key=lambda x :x.get('height',0), reverse=sorted_order)
 
 	return sorted_data

@@ -1,1 +1,62 @@
 This is my project 
+
+from fastapi import FastAPI,Path,Query,HTTPException
+from pydantic_1 import BaseModel
+from fastapi.templating import Jinja2Templates
+import json
+
+
+app = FastAPI()
+
+with open('patient.json','r') as f :
+	load_data  = json.load(f)
+
+
+
+
+@app.get('/')
+def home():
+	return {'message':"This is a Homepage"}
+
+
+@app.get('/about')
+def about():
+	return {
+		'This page':"This is Hospital management system software it will help you to store your all record"
+	}
+
+@app.get('/view')
+def show():
+	# data = load_data()
+	return load_data
+
+
+@app.get('/patient/{patient_id}')
+def patient(patient_id:str=Path(...,description="ID of the Patient",example='P001')):
+	data = load_data
+
+	if patient_id in data:
+		return data[patient_id]
+	return {"error":"Patient not found"}
+
+
+@app.get('/sort')
+def sort_patient(sort_by:str = Query(...,description="Sort according to what ?",example=["Height",'Age']),order_by:str = Query('asc',description='Ascending or Descending Order ')):
+	
+	valid_fields = ['height','weight','bmi']
+
+	if sort_by not in valid_fields:
+		raise HTTPException(status_code=400,detail = f'Invalid field select from {valid_fields}')
+
+
+	if order_by not in ['asc','desc']:
+		raise HTTPException(status_code =400,detail = 'Invalid order select between asc and desc')
+	
+	data  = load_data
+
+	sorted_order = True if order_by == 'desc' else False
+
+
+	sorted_data =  sorted(data.values(),key=lambda x : x.get(sort_by,0) ,reverse=sorted_order)
+
+	return sorted_data
